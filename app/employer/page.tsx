@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import EmployerDashboard from './EmployerDashboard'
 
+export const dynamic = 'force-dynamic'
+
 export default async function EmployerPage(){
   try {
     const token = cookies().get('token')?.value

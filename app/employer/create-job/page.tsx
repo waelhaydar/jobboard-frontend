@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import JobPostForm from '../JobPostForm'
 
+export const dynamic = 'force-dynamic'
+
 export default async function CreateJobPage() {
   try {
     const token = cookies().get('token')?.value
