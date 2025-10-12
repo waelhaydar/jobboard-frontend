@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Candidate {
+  id              Int            @id @default(autoincrement())
+  email           String         @unique
+  password        String
+  resumeUrl       String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  name            String?
+  address         String?
+  dob             DateTime?
+  lastJobLocation String?
+  lastJobPosition String?
+  mobileNumber    String?
+  applications    Application[]
+  notifications   Notification[]
+}
+
+model Employer {
+  id            Int            @id @default(autoincrement())
+  companyName   String
+  email         String         @unique
+  password      String
+  approved      Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  imageUrl      String?
+  about         String?
+  applications  Application[]
+  jobs          Job[]
+  notifications Notification[]
+}
+
+model Job {
+  id                    String         @id @default(uuid())
+  slug                  String         @unique
+  title                 String
+  description           String
+  location              String
+  jobType               JobType        @default(FULL_TIME)
+  salaryType            SalaryType     @default(ANNUAL)
+  salary                Int
+  salaryRange           String?
+  vacancies             Int            @default(1)
+  experience            Experience     @default(ENTRY_LEVEL)
+  status                JobStatus      @default(OPEN)
+  createdAt             DateTime       @default(now())
+  employerId            Int
+  hiringFrom            String?
+  basicMonthlySalaryUSD Int?
+  transportation        Boolean        @default(false)
+  accommodation         Boolean        @default(false)
+  freeMeals             Boolean        @default(false)
+  bonuses               Boolean        @default(false)
+  companyCar            Boolean        @default(false)
+  applications          Application[]
+  employer              Employer       @relation(fields: [employerId], references: [id])
+  notifications         Notification[]
+}
+
+model Application {
+  id                      Int               @id @default(autoincrement())
+  candidateId             Int?
+  employerId              Int
+  jobId                   String
+  status                  ApplicationStatus @default(PENDING)
+  resumePath              String
+  extractedText           String?
+  extractedName           String?
+  extractedEmail          String?
+  extractedPhone          String?
+  extractedLinkedIn       String?
+  extractedSkills         String?
+  yearsExperience         Int?
+  careerLevel             String?
+  experienceRelatedToJob  Float?
+  last3Positions          String?
+  educationLevel          String?
+  totalSkills             Int?
+  hardSkills              String?
+  softSkills              String?
+  topKeywords             String?
+  textPreview             String?
+  createdAt               DateTime          @default(now())
+  score                   Float?
+  candidate               Candidate?        @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  employer                Employer          @relation(fields: [employerId], references: [id])
+  job                     Job               @relation(fields: [jobId], references: [id])
+}
+
+model Notification {
+  id          Int        @id @default(autoincrement())
+  title       String
+  body        String
+  read        Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  employerId  Int?
+  candidateId Int?
+  admin       Boolean    @default(false)
+  jobId       String?
+  Employer    Employer?  @relation(fields: [employerId], references: [id])
+  Candidate   Candidate? @relation(fields: [candidateId], references: [id])
+  Job         Job?       @relation(fields: [jobId], references: [id])
+}
+
+model Settings {
+  id                    Int @id @default(autoincrement())
+  cryptoCurrenciesCount Int @default(5)
+}
+
+model NewsItem {
+  id              Int          @id @default(autoincrement())
+  title           String
+  content         String
+  priority        NewsPriority @default(MEDIUM)
+  category        String?
+  expiresAt       DateTime?
+  targetAudience  NewsAudience @default(ALL)
+  displayPosition NewsPosition @default(BANNER)
+  imageUrl        String?
+  active          Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  ONLINE
+  REMOTE
+}
+
+enum SalaryType {
+  ANNUAL
+  MONTHLY
+  HOURLY
+}
+
+enum Experience {
+  ENTRY_LEVEL
+  ASSOCIATE
+  MID_SENIOR_LEVEL
+  DIRECTOR
+  EXECUTIVE
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+  FILLED
+}
+
+enum ApplicationStatus {
+  PENDING
+  VIEWED
+  ACCEPTED
+  REJECTED
+}
+
+enum NewsPriority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum NewsAudience {
+  ALL
+  CANDIDATES
+  EMPLOYERS
+}
+
+enum NewsPosition {
+  BANNER
+  SIDEBAR
+  MODAL
+}
+
+model CvData {
+  id         Int      @id @default(autoincrement())
+  fileName   String
+  name       String?
+  email      String?
+  phone      String?
+  skills     String?
+  text       String?
+  createdAt  DateTime @default(now())
+}
