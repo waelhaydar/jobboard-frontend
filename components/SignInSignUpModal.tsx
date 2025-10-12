@@ -9,6 +9,7 @@ interface SignInSignUpModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
   jobId?: string;
+  initialUserType?: 'candidate' | 'employer';
 }
 
 const SignInSignUpModal: React.FC<SignInSignUpModalProps> = ({ isSignedIn, isModalOpen, setIsModalOpen, jobId }) => {

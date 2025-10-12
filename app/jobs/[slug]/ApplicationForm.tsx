@@ -331,6 +331,10 @@ export default function ApplicationForm({ jobId, employerId, jobSlug }: Applicat
   const [uploadingResume, setUploadingResume] = useState(false)
   const [uploadSuccess, setUploadSuccess] = useState(false)
 
+  const [extractedName, setExtractedName] = useState<string>('')
+  const [extractedPhone, setExtractedPhone] = useState<string>('')
+  const [extractedSkills, setExtractedSkills] = useState<string>('')
+
   // Hooks
   const router = useRouter()
   const { setIsInApplicationForm, confirmLeaveApplication, setJobSlug } = useApplicationForm()

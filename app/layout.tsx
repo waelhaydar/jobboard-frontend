@@ -13,6 +13,7 @@ import { cookies } from 'next/headers'
 import type { Metadata, Viewport } from 'next'
 import Footer from '../components/Footer'
 import WireGlowWaves from '../components/WireGlowWaves'
+import { UserType } from './constants/menuConfig'
 
 // Lazy load client-side components
 const BrowserCloseHandler = dynamic(
@@ -58,9 +59,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const token = cookies().get('token')?.value
   const entity = await getEntityFromToken(token)
   const isSignedIn = !!entity
-  const userType = entity?.type ?? null
+  const userType: UserType = (entity?.type as UserType) ?? null
   const employerApproved = userType === 'employer' ? (entity as any)?.employer?.approved ?? null : null
-  const isPending = userType === 'candidate_pending'
+  const isPending = (entity?.type as string) === 'candidate_pending'
 
   return (
     <html lang="en" suppressHydrationWarning>

@@ -13,7 +13,7 @@ interface AuthModalContextType {
 
 const AuthModalContext = createContext<AuthModalContextType | undefined>(undefined)
 
-export const AuthModalProvider = ({ children }: { children: ReactNode }) => {
+export const AuthModalProvider = ({ children, isSignedIn }: { children: ReactNode; isSignedIn?: boolean }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [jobId, setJobId] = useState<string | undefined>(undefined)
   const [initialUserType, setInitialUserType] = useState<'candidate' | 'employer'>('candidate') // State for initial user type

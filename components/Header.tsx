@@ -7,9 +7,11 @@ import CryptoMarketWidget from './CryptoMarketWidget'
 import Breadcrumbs from './Breadcrumbs'
 import { usePathname } from 'next/navigation'
 
+import { UserType } from '../app/constants/menuConfig'
+
 interface HeaderProps {
   isSignedIn: boolean
-  userType: string | null
+  userType: UserType
   employerApproved: boolean | null
   isPending?: boolean
 }
