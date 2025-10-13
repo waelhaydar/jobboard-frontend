@@ -5,9 +5,7 @@ import jwt from 'jsonwebtoken'
 const SECRET = process.env.JWT_SECRET || 'devsecret'
 
 export async function POST(req: Request) {
-  const form = await req.formData()
-  const email = form.get('email')?.toString()
-  const password = form.get('password')?.toString()
+  const { email, password } = await req.json()
 
   if (!email || !password) return NextResponse.json({ error: 'Email and password are required' }, { status: 400 })
 

@@ -4,9 +4,9 @@ import { prisma } from './prismaClient';
 import { logger } from './logger';
 import { Admin, Candidate, Employer, AuthResult } from './types'; // Import the types
 
-export async function authMiddleware(req: NextRequest) {
+export async function authMiddleware(req: NextRequest | Request) {
   console.log('authMiddleware: Starting execution.');
-  const token = req.cookies.get('token')?.value;
+  const token = (req as NextRequest).cookies.get('token')?.value;
   console.log('authMiddleware: Token retrieved:', token ? 'present' : 'absent');
   console.log('authMiddleware: Before verifyToken.');
   const data = await verifyToken(token); // Ensure verifyToken is awaited if it's async

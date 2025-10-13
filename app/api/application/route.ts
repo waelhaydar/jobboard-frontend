@@ -46,7 +46,7 @@ async function parseCV(fileBuffer, filename, jobDescription = null) {
 export async function POST(req) {
   try {
     // Authentication check
-    const authResult = await authMiddleware(req);
+    const authResult = await authMiddleware(req as any);
     if ('status' in authResult) return authResult;
     if (authResult.type !== 'candidate') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
