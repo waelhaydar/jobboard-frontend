@@ -20,7 +20,7 @@ async function parseCV(fileBuffer, filename, jobDescription = null) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
 
-    const res = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
+    const res = await fetch(`https://jobboard-backend-ht5v.onrender.com/${endpoint}`, {
       method: 'POST',
       body: formData,
       signal: controller.signal

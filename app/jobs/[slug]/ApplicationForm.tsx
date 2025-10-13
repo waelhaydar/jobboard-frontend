@@ -466,16 +466,16 @@ export default function ApplicationForm({ jobId, employerId, jobSlug }: Applicat
     try {
       const formData = new FormData()
       formData.append('file', file)
-      
-      const res = await fetch('http://127.0.0.1:8000/parse-cv', {
+
+      const res = await fetch('https://jobboard-backend-ht5v.onrender.com/parse-cv', {
         method: 'POST',
         body: formData,
       })
-      
+
       if (!res.ok) {
         throw new Error(`CV parsing failed with status: ${res.status}`)
       }
-      
+
       return await res.json()
     } catch (err) {
       console.error('Error parsing CV:', err)
