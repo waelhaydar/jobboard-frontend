@@ -4,8 +4,8 @@ generator client {
 
 datasource db {
   provider  = "postgres"
-  url       = env("DATABASE_URL") // Uses the pooled connection for the app
-  directUrl = env("DIRECT_URL")   // Uses the direct connection for Prisma CLI
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Admin {
@@ -75,33 +75,33 @@ model Job {
 }
 
 model Application {
-  id                      Int               @id @default(autoincrement())
-  candidateId             Int?
-  employerId              Int
-  jobId                   String
-  status                  ApplicationStatus @default(PENDING)
-  resumePath              String
-  extractedText           String?
-  extractedName           String?
-  extractedEmail          String?
-  extractedPhone          String?
-  extractedLinkedIn       String?
-  extractedSkills         String?
-  yearsExperience         Int?
-  careerLevel             String?
-  experienceRelatedToJob  Float?
-  last3Positions          String?
-  educationLevel          String?
-  totalSkills             Int?
-  hardSkills              String?
-  softSkills              String?
-  topKeywords             String?
-  textPreview             String?
-  createdAt               DateTime          @default(now())
-  score                   Float?
-  candidate               Candidate?        @relation(fields: [candidateId], references: [id], onDelete: Cascade)
-  employer                Employer          @relation(fields: [employerId], references: [id])
-  job                     Job               @relation(fields: [jobId], references: [id])
+  id                     Int               @id @default(autoincrement())
+  candidateId            Int?
+  employerId             Int
+  jobId                  String
+  status                 ApplicationStatus @default(PENDING)
+  resumePath             String
+  extractedText          String?
+  extractedName          String?
+  extractedEmail         String?
+  extractedPhone         String?
+  extractedLinkedIn      String?
+  extractedSkills        String?
+  yearsExperience        Int?
+  careerLevel            String?
+  experienceRelatedToJob Float?
+  last3Positions         String?
+  educationLevel         String?
+  totalSkills            Int?
+  hardSkills             String?
+  softSkills             String?
+  topKeywords            String?
+  textPreview            String?
+  createdAt              DateTime          @default(now())
+  score                  Float?
+  candidate              Candidate?        @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  employer               Employer          @relation(fields: [employerId], references: [id])
+  job                    Job               @relation(fields: [jobId], references: [id])
 }
 
 model Notification {
@@ -114,8 +114,8 @@ model Notification {
   candidateId Int?
   admin       Boolean    @default(false)
   jobId       String?
-  Employer    Employer?  @relation(fields: [employerId], references: [id])
   Candidate   Candidate? @relation(fields: [candidateId], references: [id])
+  Employer    Employer?  @relation(fields: [employerId], references: [id])
   Job         Job?       @relation(fields: [jobId], references: [id])
 }
 
@@ -137,6 +137,17 @@ model NewsItem {
   active          Boolean      @default(true)
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
+}
+
+model CvData {
+  id        Int      @id @default(autoincrement())
+  fileName  String
+  name      String?
+  email     String?
+  phone     String?
+  skills    String?
+  text      String?
+  createdAt DateTime @default(now())
 }
 
 enum JobType {
@@ -189,15 +200,4 @@ enum NewsPosition {
   BANNER
   SIDEBAR
   MODAL
-}
-
-model CvData {
-  id         Int      @id @default(autoincrement())
-  fileName   String
-  name       String?
-  email      String?
-  phone      String?
-  skills     String?
-  text       String?
-  createdAt  DateTime @default(now())
 }

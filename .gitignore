@@ -1,6 +1,4 @@
 node_modules
 .env
-.env.local
 .next
-/dev.db
 /public/resumes
