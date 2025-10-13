@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider  = "postgres"
   url       = env("DATABASE_URL") // Uses the pooled connection for the app
   directUrl = env("DIRECT_URL")   // Uses the direct connection for Prisma CLI
 }
