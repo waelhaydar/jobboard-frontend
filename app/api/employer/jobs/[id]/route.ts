@@ -36,6 +36,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const description = formData.get('description') as string
     const location = formData.get('location') as string
     const jobType = formData.get('jobType') as string
+    const category = formData.get('category') as string
     const hiringFrom = formData.get('hiringFrom') as string
     const basicMonthlySalaryUSD = formData.get('basicMonthlySalaryUSD') as string
     const transportation = formData.get('transportation') as string === 'true'
@@ -57,6 +58,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         description,
         location,
         jobType: jobType as JobType,
+        category: category as any,
         hiringFrom,
         basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
         transportation,

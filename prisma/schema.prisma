@@ -61,6 +61,7 @@ model Job {
   vacancies             Int            @default(1)
   experience            Experience     @default(ENTRY_LEVEL)
   status                JobStatus      @default(OPEN)
+  category              JobCategory    @default(FOOD_RETAIL)
   createdAt             DateTime       @default(now())
   employerId            Int
   hiringFrom            String?
@@ -176,6 +177,17 @@ enum JobStatus {
   OPEN
   CLOSED
   FILLED
+}
+
+enum JobCategory {
+  FOOD_RETAIL
+  FASHION_RETAIL
+  AUTOMOTIVE_RETAIL
+  RESTAURANTS
+  HOTELS
+  ELECTRONICS
+  HOME_DIY
+  SCHOOLS
 }
 
 enum ApplicationStatus {

@@ -17,6 +17,7 @@ export async function POST(req: Request){
     const description = form.get('description')?.toString()
     const location = form.get('location')?.toString()
     const jobType = form.get('jobType')?.toString()
+    const category = form.get('category')?.toString()
     const hiringFrom = form.get('hiringFrom')?.toString()
     const basicMonthlySalaryUSD = form.get('basicMonthlySalaryUSD')?.toString()
     const transportation = form.get('transportation')?.toString() === 'true'
@@ -37,6 +38,7 @@ export async function POST(req: Request){
         description,
         location,
         jobType: jobType as JobType,
+        category: category as any,
         salary: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : 0,
         salaryType: 'MONTHLY',
         salaryRange: null,

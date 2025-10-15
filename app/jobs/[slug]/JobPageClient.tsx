@@ -75,6 +75,14 @@ export default function JobPageClient({ job, isLoggedIn, entity, isEmployer, app
                   )}
                 </div>
 
+                {job.category && (
+                  <div className="mb-4">
+                    <span className="text-xs font-medium px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full border border-purple-500/30">
+                      {job.category.replace('_', ' ')}
+                    </span>
+                  </div>
+                )}
+
                 <div className="flex items-center gap-2 text-job-muted">
                   <span className="font-medium">{job.employer.companyName}</span>
                   <span>•</span>

@@ -20,6 +20,7 @@ interface Job {
   description: string;
   location: string;
   jobType?: string;
+  category?: string;
   hiringFrom?: string;
   basicMonthlySalaryUSD?: number;
   transportation?: boolean;
@@ -43,6 +44,7 @@ export default function JobPostForm({ employerId, job, onSuccess }: JobPostFormP
     description: job?.description || '',
     location: job?.location || '',
     jobType: job?.jobType || 'FULL_TIME',
+    category: job?.category || 'FOOD_RETAIL',
     hiringFrom: job?.hiringFrom || '',
     basicMonthlySalaryUSD: job?.basicMonthlySalaryUSD || '',
     transportation: job?.transportation || false,
@@ -70,6 +72,7 @@ export default function JobPostForm({ employerId, job, onSuccess }: JobPostFormP
         description: job.description,
         location: job.location || '',
         jobType: job.jobType || 'FULL_TIME',
+        category: job.category || 'FOOD_RETAIL',
         hiringFrom: job.hiringFrom || '',
         basicMonthlySalaryUSD: job.basicMonthlySalaryUSD || '',
         transportation: job.transportation || false,
@@ -139,6 +142,7 @@ export default function JobPostForm({ employerId, job, onSuccess }: JobPostFormP
             description: '',
             location: '',
             jobType: 'FULL_TIME',
+            category: 'FOOD_RETAIL',
             hiringFrom: '',
             basicMonthlySalaryUSD: '',
             transportation: false,
@@ -194,6 +198,26 @@ export default function JobPostForm({ employerId, job, onSuccess }: JobPostFormP
               <p className="text-xs text-job-muted mt-2">
                 {formData.description.length}/2000 characters
               </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-job-text mb-2">
+                Job Category
+              </label>
+              <select
+                value={formData.category}
+                onChange={(e) => updateFormData('category', e.target.value)}
+                className="job-search-input w-full px-4 py-3"
+              >
+                <option value="FOOD_RETAIL">Food Retail</option>
+                <option value="FASHION_RETAIL">Fashion Retail</option>
+                <option value="AUTOMOTIVE_RETAIL">Automotive Retail</option>
+                <option value="RESTAURANTS">Restaurants</option>
+                <option value="HOTELS">Hotels</option>
+                <option value="ELECTRONICS">Electronics</option>
+                <option value="HOME_DIY">Home & DIY</option>
+                <option value="SCHOOLS">Schools</option>
+              </select>
             </div>
           </div>
         )

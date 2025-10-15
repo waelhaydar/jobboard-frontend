@@ -12,6 +12,7 @@ interface Job {
   location?: string
   jobType?: string
   experience?: string
+  category?: string
   basicMonthlySalaryUSD?: number
   employer?: {
     companyName: string
@@ -81,13 +82,20 @@ export default function JobCard({ job, isLoading = false, onError }: JobCardProp
 
   return (
     <Link href={`/jobs/${job.slug}`} className="group block">
-      <article className="glass-dark p-6 cursor-pointer transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-cyan-500/20 relative overflow-hidden">
+      <article className=" p-6 cursor-pointer transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-cyan-500/20 relative overflow-hidden">
 
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors duration-300">
-              {job.title}
-            </h3>
+            <div className="flex items-center gap-2 mb-3">
+              <h3 className="text-xl font-bold text-white line-clamp-2 group-hover:text-cyan-400 transition-colors duration-300">
+                {job.title}
+              </h3>
+              {job.category && (
+                <span className="text-xs font-medium px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full border border-purple-500/30">
+                  {job.category.replace('_', ' ')}
+                </span>
+              )}
+            </div>
 
             <div className="space-y-3 mb-4">
               <div className="flex items-center text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-200">

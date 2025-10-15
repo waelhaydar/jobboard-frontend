@@ -1,6 +1,15 @@
-# TODO: Configure Prisma with provided environment variables
+# Jobboard TODO
 
-- [x] Update prisma/schema.prisma to use DATABASE_POSTGRES_PRISMA_URL and DATABASE_POSTGRES_URL_NON_POOLING
-- [x] Create .env file with all provided environment variables
-- [x] Run prisma generate to regenerate the Prisma client
-- [x] Run prisma db push to sync the database schema
+## Current Tasks
+- [ ] Set default category to 'FOOD_RETAIL' in job creation form (already implemented in JobPostForm.tsx)
+- [ ] Add category badge to job detail page (JobPageClient.tsx)
+
+## Completed Tasks
+- [x] Display category badge in JobCard.tsx
+- [x] Default category in JobPostForm.tsx is 'FOOD_RETAIL'
+- [x] Fixed backend to save and update category correctly
+- [x] Added category badge to job detail page
+
+## Notes
+- Category badge should match the style in JobCard.tsx: purple background with white text
+- Badge should be placed near the job title in the job detail page
