@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '../../../../lib/prismaClient'
 import { authMiddleware } from '../../../../lib/authMiddleware'
 import { createSlug } from '../../../../lib/utils'
-type JobType = 'FULL_TIME' | 'PART_TIME' | 'ONLINE' | 'REMOTE'
+import { JobType } from '@prisma/client'
 
 export async function POST(req: Request){
   try {
@@ -31,28 +31,33 @@ export async function POST(req: Request){
     }
 
     const slug = createSlug(title)
+    const createData: any = {
+      title,
+      slug: slug,
+      description,
+      location,
+      jobType: jobType as JobType,
+      salary: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : 0,
+      salaryType: 'MONTHLY',
+      salaryRange: null,
+      vacancies: 1,
+      experience: 'ENTRY_LEVEL',
+      employerId: authResult.employer.id,
+      hiringFrom,
+      basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
+      transportation,
+      accommodation,
+      freeMeals,
+      bonuses,
+      companyCar
+    }
+
+    if (category) {
+      createData.category = category
+    }
+
     const job = await prisma.job.create({
-      data: {
-        title,
-        slug: slug,
-        description,
-        location,
-        jobType: jobType as JobType,
-        category: category as any,
-        salary: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : 0,
-        salaryType: 'MONTHLY',
-        salaryRange: null,
-        vacancies: 1,
-        experience: 'ENTRY_LEVEL',
-        employerId: authResult.employer.id,
-        hiringFrom,
-        basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
-        transportation,
-        accommodation,
-        freeMeals,
-        bonuses,
-        companyCar
-      }
+      data: createData
     })
 
     // Removed notification for admins when employer creates a job as approval is not required
