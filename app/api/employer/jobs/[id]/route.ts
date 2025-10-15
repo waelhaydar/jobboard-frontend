@@ -49,23 +49,31 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     const status = formData.get('status') as string | null
 
+    const updateData: any = {
+      title,
+      description,
+      location,
+      jobType: jobType as any,
+      hiringFrom,
+      basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
+      transportation,
+      accommodation,
+      freeMeals,
+      bonuses,
+      companyCar,
+    }
+
+    if (category) {
+      updateData.category = category as any
+    }
+
+    if (status) {
+      updateData.status = status as any
+    }
+
     const updatedJob = await prisma.job.update({
       where: { id: jobId },
-      data: {
-        title,
-        description,
-        location,
-        jobType: jobType as any,
-        category: category as any,
-        hiringFrom,
-        basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
-        transportation,
-        accommodation,
-        freeMeals,
-        bonuses,
-        companyCar,
-        ...(status ? { status: status as import('@prisma/client').JobStatus } : {})
-      }
+      data: updateData
     })
 
     return NextResponse.json({ message: 'Job updated successfully', job: updatedJob })
