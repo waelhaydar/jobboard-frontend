@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '../../../../../lib/prismaClient'
 import { getEntityFromToken } from '../../../../../lib/auth'
-type JobType = 'FULL_TIME' | 'PART_TIME' | 'ONLINE' | 'REMOTE'
-type SalaryType = 'ANNUAL' | 'MONTHLY' | 'HOURLY'
-type Experience = 'ENTRY_LEVEL' | 'ASSOCIATE' | 'MID_SENIOR_LEVEL' | 'DIRECTOR' | 'EXECUTIVE'
-type JobCategory = 'FOOD_RETAIL' | 'FASHION_RETAIL' | 'AUTOMOTIVE_RETAIL' | 'RESTAURANTS' | 'HOTELS' | 'ELECTRONICS' | 'HOME_DIY' | 'SCHOOLS'
+import { JobCategory, JobType } from '@prisma/client'
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
