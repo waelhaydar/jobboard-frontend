@@ -64,7 +64,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     if (category) {
-      updateData.category = category as any
+      updateData.category = category
     }
 
     if (status) {
