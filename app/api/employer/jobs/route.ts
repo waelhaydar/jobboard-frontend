@@ -8,7 +8,7 @@ export async function POST(req: Request){
   try {
     const authResult = await authMiddleware(req as any)
     if ('status' in authResult && authResult.status === 401) return authResult
-    if (authResult.type !== 'employer' || !('employer' in authResult && authResult.employer?.approved)) {
+    if (authResult.type !== 'employer' || !authResult.employer || !authResult.employer.approved) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
