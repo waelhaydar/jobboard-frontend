@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '../../../../../lib/prismaClient'
 import { getEntityFromToken } from '../../../../../lib/auth'
-import { JobCategory, JobType } from '@prisma/client'
+
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -55,8 +55,8 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         title,
         description,
         location,
-        jobType: jobType as JobType,
-        category: category as JobCategory,
+        jobType: jobType as any,
+        category: category as any,
         hiringFrom,
         basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
         transportation,
