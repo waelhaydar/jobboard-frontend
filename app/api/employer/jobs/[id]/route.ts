@@ -4,6 +4,7 @@ import { getEntityFromToken } from '../../../../../lib/auth'
 type JobType = 'FULL_TIME' | 'PART_TIME' | 'ONLINE' | 'REMOTE'
 type SalaryType = 'ANNUAL' | 'MONTHLY' | 'HOURLY'
 type Experience = 'ENTRY_LEVEL' | 'ASSOCIATE' | 'MID_SENIOR_LEVEL' | 'DIRECTOR' | 'EXECUTIVE'
+type JobCategory = 'FOOD_RETAIL' | 'FASHION_RETAIL' | 'AUTOMOTIVE_RETAIL' | 'RESTAURANTS' | 'HOTELS' | 'ELECTRONICS' | 'HOME_DIY' | 'SCHOOLS'
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -58,7 +59,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         description,
         location,
         jobType: jobType as JobType,
-        category: category as any,
+        category: category as JobCategory,
         hiringFrom,
         basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
         transportation,
