@@ -11,7 +11,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const entity = await getEntityFromToken(token)
-    if (!entity || entity.type !== 'employer' || !entity.employer) {
+    if (!entity || entity.type !== 'employer' || !entity.employer || !entity.employer.approved) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
