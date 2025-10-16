@@ -82,3 +82,41 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const token = request.cookies.get('token')?.value
+    if (!token) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const entity = await getEntityFromToken(token)
+    if (!entity || entity.type !== 'employer' || !entity.employer || !entity.employer.approved) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const jobId = params.id
+    if (!jobId) {
+      return NextResponse.json({ error: 'Invalid job ID' }, { status: 400 })
+    }
+
+    const job = await prisma.job.findUnique({
+      where: { id: jobId },
+      select: { employerId: true }
+    })
+
+    if (!job || job.employerId !== entity.employer.id) {
+      return NextResponse.json({ error: 'Job not found or unauthorized' }, { status: 404 })
+    }
+
+    // Delete the job
+    await prisma.job.delete({
+      where: { id: jobId }
+    })
+
+    return NextResponse.json({ message: 'Job deleted successfully' })
+  } catch (error) {
+    console.error('Error deleting job:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}

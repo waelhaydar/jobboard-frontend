@@ -32,7 +32,8 @@ interface EmployerDashboardProps {
 
 export default function EmployerDashboard({ employer, jobs = [], applications = [] }: EmployerDashboardProps) {
   const [apps, setApps] = useState(applications)
-  const totalJobs = jobs.length
+  const [jobList, setJobList] = useState(jobs)
+  const totalJobs = jobList.length
 
   useEffect(() => {
     const handleStatusUpdate = (event: CustomEvent) => {
@@ -48,6 +49,30 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
       window.removeEventListener('applicationStatusUpdated', handleStatusUpdate as EventListener)
     }
   }, [])
+
+  const handleDeleteJob = async (jobId: string) => {
+    if (!confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/employer/jobs/${jobId}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        setJobList(prevJobs => prevJobs.filter(job => job.id !== jobId))
+        setApps(prevApps => prevApps.filter(app => app.jobId !== jobId))
+        alert('Job deleted successfully')
+      } else {
+        const data = await response.json()
+        alert(data.error || 'Failed to delete job')
+      }
+    } catch (error) {
+      console.error('Error deleting job:', error)
+      alert('Network error. Please try again.')
+    }
+  }
 
   return (
     <div className={`min-h-screen p-8`}>
@@ -71,11 +96,11 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
                 <p className="text-3xl font-bold text-foreground">{totalJobs}</p>
               </div>
             </div>
-            {jobs.length === 0 ? (
+            {jobList.length === 0 ? (
               <p className="text-muted-foreground mt-4">You haven't posted any jobs yet.</p>
             ) : (
           <ul className="mt-4 space-y-2">
-            {jobs.map(job => (
+            {jobList.map(job => (
               <li key={job.id} className="bg-card p-3 rounded shadow-sm border">
                 <div className="flex justify-between items-center">
                   <div>
@@ -95,6 +120,12 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
                     >
                       Edit Job
                     </a>
+                    <button
+                      onClick={() => handleDeleteJob(job.id)}
+                      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition text-sm"
+                    >
+                      Delete Job
+                    </button>
                   </div>
                 </div>
                 <div className="mt-3">

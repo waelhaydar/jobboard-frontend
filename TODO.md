@@ -3,6 +3,10 @@
 ## Current Tasks
 - [ ] Set default category to 'FOOD_RETAIL' in job creation form (already implemented in JobPostForm.tsx)
 - [ ] Add category badge to job detail page (JobPageClient.tsx)
+- [x] Implement job deletion functionality
+  - [x] Add DELETE method to /api/employer/jobs/[id]/route.ts
+  - [x] Add Delete Job button to EmployerDashboard.tsx
+  - [x] Add confirmation dialog for job deletion
 
 ## Completed Tasks
 - [x] Display category badge in JobCard.tsx
