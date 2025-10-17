@@ -4,6 +4,7 @@ import { authMiddleware } from '../../../../lib/authMiddleware'
 import { createSlug } from '../../../../lib/utils'
 import { JobType } from '@prisma/client'
 
+export const dynamic = 'force-dynamic'
 export async function POST(req: Request){
   try {
     const authResult = await authMiddleware(req as any)

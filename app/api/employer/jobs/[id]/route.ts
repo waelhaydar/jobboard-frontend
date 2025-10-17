@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '../../../../../lib/prismaClient'
 import { getEntityFromToken } from '../../../../../lib/auth'
 
-
+export const dynamic = 'force-dynamic'
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const token = request.cookies.get('token')?.value
@@ -108,6 +108,16 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     if (!job || job.employerId !== entity.employer.id) {
       return NextResponse.json({ error: 'Job not found or unauthorized' }, { status: 404 })
     }
+
+    // Delete related applications first
+    await prisma.application.deleteMany({
+      where: { jobId: jobId }
+    })
+
+    // Delete related notifications
+    await prisma.notification.deleteMany({
+      where: { jobId: jobId }
+    })
 
     // Delete the job
     await prisma.job.delete({

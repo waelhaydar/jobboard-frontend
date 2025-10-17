@@ -3,7 +3,7 @@ import { prisma } from 'lib/prismaClient'
 import { authMiddleware } from 'lib/authMiddleware'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-
+export const dynamic = 'force-dynamic'
 const SECRET = process.env.JWT_SECRET || 'devsecret'
 
 export const runtime = 'nodejs'
