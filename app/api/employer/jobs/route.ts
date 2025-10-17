@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '../../../../lib/prismaClient'
 import { authMiddleware } from '../../../../lib/authMiddleware'
 import { createSlug } from '../../../../lib/utils'
-import { JobType, Prisma, JobCategory } from '@prisma/client'
+import { JobType, JobCategory } from '@prisma/client'
 
 export const dynamic = 'force-dynamic'
 export async function POST(req: Request){
