@@ -3,8 +3,7 @@ import { prisma } from '../../../../lib/prismaClient'
 import { authMiddleware } from '../../../../lib/authMiddleware'
 import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
-
-
+export const dynamic = 'force-dynamic'
 
 export async function PUT(req: Request){
   try {

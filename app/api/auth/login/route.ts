@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import { prisma } from '../../../../lib/prismaClient'
 import jwt from 'jsonwebtoken';
-
+export const dynamic = 'force-dynamic'
 const SECRET = process.env.JWT_SECRET || 'devsecret'
 
 export async function POST(req: Request){

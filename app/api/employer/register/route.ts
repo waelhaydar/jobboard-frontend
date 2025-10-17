@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import { prisma } from '../../../../lib/prismaClient'
 import { signToken } from '../../../../lib/auth'
-
+export const dynamic = 'force-dynamic'
 export async function POST(req: Request){
   try {
     const { companyName, email, password } = await req.json()

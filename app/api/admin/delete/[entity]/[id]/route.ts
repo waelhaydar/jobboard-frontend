@@ -2,7 +2,7 @@ import { prisma } from 'lib/prismaClient'
 import { getEntityFromToken } from 'lib/auth'
 import { cookies } from 'next/headers'
 
-
+export const dynamic = 'force-dynamic'
 export async function DELETE(request: Request, { params }: { params: { entity: string, id: string } }) {
   const token = cookies().get('token')?.value
   const entity = await getEntityFromToken(token)

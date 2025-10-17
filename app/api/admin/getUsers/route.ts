@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '../../../../lib/prismaClient'
 import { authMiddleware } from '../../../../lib/authMiddleware'
-
+export const dynamic = 'force-dynamic'
 export async function GET(req: Request) {
   try {
     const authResult = await authMiddleware(req as any)

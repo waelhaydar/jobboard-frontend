@@ -4,7 +4,7 @@ import { authMiddleware } from '../../../../lib/authMiddleware';
 import { prisma } from '../../../../lib/prismaClient';
 import fs from 'fs/promises';
 import path from 'path';
-
+export const dynamic = 'force-dynamic'
 export async function POST(req) {
   try {
     // Authentication check

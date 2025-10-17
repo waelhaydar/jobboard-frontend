@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server';
 import { authMiddleware } from 'lib/authMiddleware';
-
+export const dynamic = 'force-dynamic'
 export async function POST(req: NextRequest) {
   console.log('Test POST request received for /api/test');
   const authResult = await authMiddleware(req);

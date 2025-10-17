@@ -4,7 +4,7 @@ import { authMiddleware } from '../../../lib/authMiddleware';
 import { prisma } from '../../../lib/prismaClient';
 import fs from 'fs/promises';
 import path from 'path';
-
+export const dynamic = 'force-dynamic'
 // Function to parse CV using the cv_parser service
 async function parseCV(fileBuffer, filename, jobDescription = null) {
   try {

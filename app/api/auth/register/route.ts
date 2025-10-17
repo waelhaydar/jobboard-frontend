@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import { prisma } from '../../../../lib/prismaClient'
 import jwt from 'jsonwebtoken'
 const SECRET = process.env.JWT_SECRET || 'devsecret'
-
+export const dynamic = 'force-dynamic'
 export async function POST(req: Request) {
   const { email, password } = await req.json()
 

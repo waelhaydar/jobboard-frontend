@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { getEntityFromToken, signToken, verifyToken } from '@/lib/auth';
 import { prisma } from '@/lib/prismaClient';
 import bcrypt from 'bcryptjs';
-
+export const dynamic = 'force-dynamic'
 declare module 'next-auth' {
   interface Session {
     user: {

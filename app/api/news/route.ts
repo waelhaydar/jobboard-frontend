@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prismaClient';
-
+export const dynamic = 'force-dynamic'
 export async function GET() {
   try {
     // Fetch only active news items, ordered by creation date (newest first)

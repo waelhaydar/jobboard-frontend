@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { prisma } from 'lib/prismaClient'
 import { authMiddleware } from 'lib/authMiddleware'
-
+export const dynamic = 'force-dynamic'
 export async function POST(req: NextRequest){
   const authResult = await authMiddleware(req)
   if ('status' in authResult && authResult.status === 401) return authResult

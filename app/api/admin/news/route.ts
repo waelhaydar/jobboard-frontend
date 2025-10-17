@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prismaClient';
 import { getEntityFromToken } from '@/lib/auth';
 import { cookies } from 'next/headers';
-
+export const dynamic = 'force-dynamic'
 export async function POST(req: NextRequest) {
   try {
     // Try to get token from Authorization header first, then from cookies

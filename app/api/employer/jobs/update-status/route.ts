@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '../../../../../lib/prismaClient'
 import { getEntityFromToken } from '../../../../../lib/auth'
-
+export const dynamic = 'force-dynamic'
 export async function PATCH(request: NextRequest) {
   try {
     const token = request.cookies.get('token')?.value

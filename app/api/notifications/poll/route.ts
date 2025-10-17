@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from 'next/server'
 import { prisma } from 'lib/prismaClient'
 import { authMiddleware } from 'lib/authMiddleware'
 import { NotificationWithJob, NotificationWithJobPayload } from 'lib/types'
-
+export const dynamic = 'force-dynamic'
 export async function GET(req: NextRequest){
   const authResult = await authMiddleware(req)
   // If not authenticated, return public (non-admin) unread notifications instead of 401
