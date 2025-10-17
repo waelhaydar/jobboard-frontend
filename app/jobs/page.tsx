@@ -1,4 +1,5 @@
 // app/jobs/page.tsx
+export const dynamic = 'force-dynamic'
 import { prisma } from '../../lib/prismaClient'
 import JobsPageClient from './JobsPageClient'
 

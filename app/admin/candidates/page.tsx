@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import AdminSidebar from '../../../components/AdminSidebar'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminCandidatesPage() {
   const token = cookies().get('token')?.value
   const entity = await getEntityFromToken(token)

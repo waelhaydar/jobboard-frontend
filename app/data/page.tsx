@@ -1,5 +1,7 @@
 import { prisma } from '../../lib/prismaClient'
 
+export const dynamic = 'force-dynamic'
+
 export default async function DataPage() {
   const admins = await prisma.admin.findMany()
   const candidates = await prisma.candidate.findMany()

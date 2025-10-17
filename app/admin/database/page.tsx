@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import AdminDatabaseClientPage from './AdminDatabaseClientPage'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDatabasePage() {
   const token = cookies().get('token')?.value
   const entity = await getEntityFromToken(token)

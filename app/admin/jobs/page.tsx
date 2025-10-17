@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { prisma } from '../../../lib/prismaClient'
 import { getEntityFromToken } from '../../../lib/auth'
 import { cookies } from 'next/headers'

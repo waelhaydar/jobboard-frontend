@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import JobPostForm from '../../JobPostForm'
 
+export const dynamic = 'force-dynamic'
+
 interface EditJobPageProps {
   params: {
     id: string

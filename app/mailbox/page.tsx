@@ -1,4 +1,5 @@
 import { prisma } from '../../lib/prismaClient'
+export const dynamic = 'force-dynamic'
 import { getEntityFromToken } from '../../lib/auth'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
