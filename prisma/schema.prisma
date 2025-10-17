@@ -61,7 +61,7 @@ model Job {
   vacancies             Int            @default(1)
   experience            Experience     @default(ENTRY_LEVEL)
   status                JobStatus      @default(OPEN)
-  category              JobCategory    @default(false)
+  category              JobCategory    @default(FOOD_RETAIL)
   createdAt             DateTime       @default(now())
   employerId            Int
   hiringFrom            String?
