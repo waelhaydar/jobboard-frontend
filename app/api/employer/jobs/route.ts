@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '../../../../lib/prismaClient'
 import { authMiddleware } from '../../../../lib/authMiddleware'
 import { createSlug } from '../../../../lib/utils'
-import { JobType } from '@prisma/client'
+import { JobType, JobCategory } from '@prisma/client'
 
 export const dynamic = 'force-dynamic'
 export async function POST(req: Request){
@@ -27,6 +27,9 @@ export async function POST(req: Request){
     const bonuses = form.get('bonuses')?.toString() === 'true'
     const companyCar = form.get('companyCar')?.toString() === 'true'
 
+    const validJobCategories = Object.values(JobCategory);
+    const validatedCategory = category && validJobCategories.includes(category as JobCategory) ? category as JobCategory : JobCategory.FOOD_RETAIL;
+
     if (!title || !description) {
       return NextResponse.json({ error: 'Title and description are required' }, { status: 400 })
     }
@@ -50,12 +53,14 @@ export async function POST(req: Request){
       accommodation,
       freeMeals,
       bonuses,
-      companyCar
+      companyCar,
+      category: validatedCategory
     }
 
-    if (category) {
-      createData.category = category
-    }
+    // Removed conditional category assignment as it's now handled by validation
+    // if (category) {
+    //   createData.category = category
+    // }
 
     const job = await prisma.job.create({
       data: createData
