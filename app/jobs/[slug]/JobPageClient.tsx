@@ -284,6 +284,12 @@ export default function JobPageClient({ job, isLoggedIn, entity, isEmployer, app
                     <span className="font-medium text-job-text">{new Date(job.endDate).toLocaleDateString()}</span>
                   </div>
                 )}
+                {job.jobStatus === 'CLOSED' && (
+                  <p className="text-red-500 font-semibold">This job is currently closed.</p>
+                )}
+                {job.jobStatus === 'LIMIT_REACHED' && (
+                  <p className="text-red-500 font-semibold">Applications limit reached for this job.</p>
+                )}
               </div>
             </div>
 
