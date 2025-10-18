@@ -42,6 +42,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const freeMeals = formData.get('freeMeals') as string === 'true'
     const bonuses = formData.get('bonuses') as string === 'true'
     const companyCar = formData.get('companyCar') as string === 'true'
+    const reopen = formData.get('reopen') as string === 'true'
 
     if (!title || !description) {
       return NextResponse.json({ error: 'Title and description are required' }, { status: 400 })
@@ -69,6 +70,14 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     if (status) {
       updateData.status = status as any
+    }
+
+    if (reopen) {
+      updateData.applicationsCount = 0;
+      updateData.jobStatus = 'ACTIVE';
+      const twoWeeksFromNow = new Date();
+      twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
+      updateData.endDate = twoWeeksFromNow;
     }
 
     const updatedJob = await prisma.job.update({
