@@ -244,7 +244,7 @@ export default function JobPageClient({ job, isLoggedIn, entity, isEmployer, app
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-job-muted">Applications</span>
-                  <span className="font-medium text-job-text">{applications.length}</span>
+                  <span className="font-medium text-job-text">{applications.length} / {job.applicantLimit || 'No Limit'}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-job-muted">Views</span>
@@ -252,10 +252,16 @@ export default function JobPageClient({ job, isLoggedIn, entity, isEmployer, app
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-job-muted">Status</span>
-                  <span className="px-2 py-1 bg-job-success-background text-green-800 text-xs rounded-full font-medium">
-                    {job.status || 'Active'}
+                  <span className={`px-2 py-1 rounded-full font-medium ${job.jobStatus === 'ACTIVE' ? 'bg-job-success-background text-green-800' : job.jobStatus === 'CLOSED' ? 'bg-red-200 text-red-800' : 'bg-yellow-200 text-yellow-800'}`}>
+                    {job.jobStatus}
                   </span>
                 </div>
+                {job.endDate && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-job-muted">End Date</span>
+                    <span className="font-medium text-job-text">{new Date(job.endDate).toLocaleDateString()}</span>
+                  </div>
+                )}
               </div>
             </div>
 
