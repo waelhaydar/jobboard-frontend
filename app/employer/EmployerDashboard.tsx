@@ -75,9 +75,9 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
   }
 
   return (
-    <div className={`min-h-screen p-8`}>
-      <div className="mx-auto max-w-4xl bg-white p-8 rounded-xl shadow-xl border border-gray-200 ">
-        <h1 className="text-3xl font-bold text-foreground">Employer Dashboard</h1>
+    <div className={`min-h-screen mx-auto max-w-7xl bg-white/70 p-8 rounded-xl shadow-xl border border-gray-200 `}>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-gray-800">Employer Dashboard</h1>
         <a
           href="/employer/create-job"
           className="primaryButton transition inline-block"
@@ -89,34 +89,34 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2">
           <div className="p-6 mb-6 glass-dark">
-            <h2 className="text-2xl font-bold mb-4 text-foreground">Job Posts Overview</h2>
+            <h2 className="flex items-center text-lg font-medium text-gray-700 mb-2">Job Posts Overview</h2>
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className={`bg-secondary p-4 rounded-lg`}>
-                <p className="text-lg font-medium text-muted-foreground">Total Jobs</p>
-                <p className="text-3xl font-bold text-foreground">{totalJobs}</p>
+                <p className="flex items-center text-lg font-medium text-gray-700 mb-2">Total Jobs</p>
+                <p className="flex items-center text-lg font-medium text-gray-700 mb-2">{totalJobs}</p>
               </div>
             </div>
             {jobList.length === 0 ? (
-              <p className="text-muted-foreground mt-4">You haven't posted any jobs yet.</p>
+              <p className="flex items-center text-lg font-medium text-gray-700 mb-2">You haven't posted any jobs yet.</p>
             ) : (
           <ul className="mt-4 space-y-2">
             {jobList.map(job => (
               <li key={job.id} className="bg-card p-3 rounded shadow-sm border">
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-semibold text-lg text-foreground">{job.title}</p>
+                    <p className="flex items-center text-lg font-medium text-gray-700 mb-2">{job.title}</p>
                   </div>
                   {/* Add actions like Edit/View Job */}
                   <div className="flex gap-2">
                     <a
                       href={`/jobs/${job.slug}`}
-                      className="bg-primary text-primary-foreground px-3 py-1 rounded hover:bg-primary/90 transition text-sm"
+                      className="bg-primary text-gray-600 px-3 py-1 rounded hover:bg-primary/90 transition text-sm"
                     >
                       View Job
                     </a>
                     <a
                       href={`/employer/edit-job/${job.id}`}
-                      className="bg-primary text-primary-foreground px-3 py-1 rounded hover:bg-primary/90 transition text-sm"
+                      className="bg-primary text-gray-600 px-3 py-1 rounded hover:bg-primary/90 transition text-sm"
                     >
                       Edit Job
                     </a>
@@ -129,19 +129,19 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
                   </div>
                 </div>
                 <div className="mt-3">
-                  <h3 className="font-semibold text-md mb-2 text-foreground">Applications</h3>
+                  <h3 className="font-semibold text-md mb-2 text-gray-600">Applications</h3>
                   <ul className="space-y-2">
                     {apps.filter(app => app.jobId === job.id).map(app => (
                       <li key={app.id} className="bg-card p-2 rounded border">
-                        <div className="text-foreground"><strong>Name:</strong> {app.extractedName || app.candidate?.name || 'N/A'}</div>
-                        <div className="text-foreground"><strong>Email:</strong> {app.extractedEmail || app.candidate?.email || 'N/A'}</div>
-                        <div className="text-foreground"><strong>Phone:</strong> {app.extractedPhone || app.candidate?.mobileNumber || 'N/A'}</div>
-                        <div className="text-foreground"><strong>Skills:</strong> {app.extractedSkills || 'N/A'}</div>
-                        <div className="text-foreground"><strong>Status:</strong> {app.status}</div>
+                        <div className="text-gray-600"><strong>Name:</strong> {app.extractedName || app.candidate?.name || 'N/A'}</div>
+                        <div className="text-gray-600"><strong>Email:</strong> {app.extractedEmail || app.candidate?.email || 'N/A'}</div>
+                        <div className="text-gray-600"><strong>Phone:</strong> {app.extractedPhone || app.candidate?.mobileNumber || 'N/A'}</div>
+                        <div className="text-gray-600"><strong>Skills:</strong> {app.extractedSkills || 'N/A'}</div>
+                        <div className="text-gray-600"><strong>Status:</strong> {app.status}</div>
                       </li>
                     ))}
                     {apps.filter(app => app.jobId === job.id).length === 0 && (
-                      <li className="text-muted-foreground">No applications yet.</li>
+                      <li className="text-gray-600">No applications yet.</li>
                     )}
                   </ul>
                 </div>

@@ -1,19 +1,12 @@
-# Jobboard TODO
+# TODO: Make Badges Vertical Ribbon on Left Side of JobCard
 
-## Current Tasks
-- [ ] Set default category to 'FOOD_RETAIL' in job creation form (already implemented in JobPostForm.tsx)
-- [ ] Add category badge to job detail page (JobPageClient.tsx)
-- [x] Implement job deletion functionality
-  - [x] Add DELETE method to /api/employer/jobs/[id]/route.ts
-  - [x] Add Delete Job button to EmployerDashboard.tsx
-  - [x] Add confirmation dialog for job deletion
-
-## Completed Tasks
-- [x] Display category badge in JobCard.tsx
-- [x] Default category in JobPostForm.tsx is 'FOOD_RETAIL'
-- [x] Fixed backend to save and update category correctly
-- [x] Added category badge to job detail page
+## Tasks
+- [x] Modify JobCard.tsx to reposition category badge as vertical ribbon on left side
+- [x] Assign different colors to each category badge (e.g., cyan, purple, pink, green, blue)
+- [x] Ensure ribbon only appears if category exists
+- [x] Test the layout changes visually
 
 ## Notes
-- Category badge should match the style in JobCard.tsx: purple background with white text
-- Badge should be placed near the job title in the job detail page
+- Use flex layout for article to accommodate ribbon
+- Rotate text -90deg for vertical orientation
+- Map categories to unique colors dynamically or via predefined map

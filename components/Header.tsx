@@ -35,7 +35,7 @@ export default function Header({ isSignedIn, userType, employerApproved, isPendi
   }
 
   return (
-    <div className="glass-dark">
+    <div className="glass-dark mb-16">
       <CryptoMarketWidget />
 
 

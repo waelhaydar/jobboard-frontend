@@ -1077,3 +1077,93 @@ input:is(:-webkit-autofill, :autofill) {
   border-color: transparent;
 
 }
+
+/* =========================
+   CATEGORY GRADIENTS WITH TEXT CUTOUT
+   ========================= */
+
+/* FOOD_RETAIL */
+.category-FOOD_RETAIL {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.759); 
+  background: linear-gradient(to bottom, #22d3ee, #0891b2);
+ text-shadow: #000 1px 1px 6px;
+}
+
+/* FASHION_RETAIL */
+.category-FASHION_RETAIL {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.634);
+  background: linear-gradient(to bottom, #a78bfa, #7c3aed);
+  text-shadow: #000 1px 1px 6px;
+}
+
+/* AUTOMOTIVE_RETAIL */
+.category-AUTOMOTIVE_RETAIL {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.748);
+  text-shadow: #000 1px 1px 6px;
+  background: linear-gradient(to bottom, #f472b6, #db2777);
+}
+
+/* RESTAURANTS */
+.category-RESTAURANTS {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.718);
+  text-shadow: #000 1px 1px 6px;
+
+
+  background: linear-gradient(to bottom, #4ade80, #16a34a);
+}
+
+/* HOTELS */
+.category-HOTELS {
+  font-weight: bold;
+  font-size:1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.718);
+  text-shadow: #000 1px 1px 6px;
+  background: linear-gradient(to bottom, #60a5fa, #2563eb);
+}
+
+/* ELECTRONICS */
+.category-ELECTRONICS {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.718);
+  text-shadow: #000 1px 1px 6px;
+  background: linear-gradient(to bottom, #fbbf24, #d97706);
+}
+
+/* HOME_DIY */
+.category-HOME_DIY {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+
+  color: rgba(255, 255, 255, 0.718);
+  text-shadow: #000 1px 1px 6px;
+
+  background: linear-gradient(to bottom, #f87171, #dc2626);
+}
+
+/* SCHOOLS */
+.category-SCHOOLS {
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+
+  color: rgba(255, 255, 255, 0.718);
+  text-shadow: #000 1px 1px 6px;
+  background: linear-gradient(to bottom, #818cf8, #4f46e5);
+}
+

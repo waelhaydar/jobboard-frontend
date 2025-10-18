@@ -52,7 +52,7 @@ export default function EmployerProfileClient({ employer, className, showEdit = 
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 glass-dark">
+    <div className="mx-auto max-w-3xl bg-gradient-to-r from-cyan-500/70 to-purple-500/70 border border-cyan-500/30 text-gray-800 p-8 rounded-xl shadow-xl">
       <h2 className="text-2xl font-bold mb-4 text-foreground">{title || 'Employer Profile'}</h2>
       {!isEditing ? (
         <>

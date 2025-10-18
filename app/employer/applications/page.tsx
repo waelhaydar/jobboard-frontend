@@ -118,7 +118,7 @@ export default function ApplicationsPage() {
   }
 
   const ApplicationCard = ({ application }: { application: Application }) => (
-    <div className="bg-card/50 p-4 rounded-lg border border-border hover:border-primary/20 transition-all duration-200 group">
+    <div className="min-h-screen mx-auto max-w-7xl bg-white p-8 rounded-xl shadow-xl border border-gray-200 ">
       <div className="flex justify-between items-start mb-3">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
@@ -213,7 +213,7 @@ export default function ApplicationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
+    <div className="min-h-screen mx-auto max-w-7xl bg-white/70 p-8 rounded-xl shadow-xl border border-gray-200">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

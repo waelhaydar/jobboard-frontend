@@ -78,9 +78,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 <div className="fixed-background" aria-hidden="true" />
                 <div className="fixed-overlay" aria-hidden="true" />
 
-                {/* Bottom Waves */}
-                <WireGlowWaves />
-
                 {/* Main Content */}
                 <div className="main-content relative z-1">
                   <Header
