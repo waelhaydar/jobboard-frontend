@@ -7,8 +7,6 @@ import mammoth from 'mammoth'
 import pdfParse from 'pdf-parse'
 import { prisma } from '@/lib/prismaClient'
 import { authMiddleware } from '@/lib/authMiddleware'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { Job, JobStatus, Prisma } from '@prisma/client'
 
 type JobWithApplicationsCount = Prisma.JobGetPayload<{

@@ -1,5 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client'
-import { type Prisma } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
@@ -31,7 +30,7 @@ async function main(){
     await prisma.job.upsert({
       where: { slug: j.slug },
       update: {},
-      create: Prisma.JobCreateInput = {
+      create: {
         title: j.title,
         slug: j.slug,
         description: j.description,
