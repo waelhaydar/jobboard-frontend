@@ -76,7 +76,7 @@ export default function EmployerDashboard({ employer, jobs = [], applications = 
 
   return (
     <div className={`min-h-screen p-8`}>
-      <div className="flex items-center justify-between mb-6">
+      <div className="mx-auto max-w-4xl bg-white p-8 rounded-xl shadow-xl border border-gray-200 ">
         <h1 className="text-3xl font-bold text-foreground">Employer Dashboard</h1>
         <a
           href="/employer/create-job"

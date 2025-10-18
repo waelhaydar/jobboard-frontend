@@ -19,11 +19,11 @@ async function main(){
   })
 
   const jobs = [
-    { title: 'Store Manager - Downtown', slug: 'store-manager-downtown', location: 'Downtown', description: 'Manage store operations, staff, inventory.' },
-    { title: 'Assistant Store Manager', slug: 'assistant-store-manager', location: 'City Center', description: 'Assist store manager in daily tasks and staff scheduling.' },
-    { title: 'Sales Associate', slug: 'sales-associate', location: 'Mall Branch', description: 'Customer service, sales, and merchandising.' },
-    { title: 'Inventory Specialist', slug: 'inventory-specialist', location: 'Warehouse', description: 'Manage stock counts, ordering, and supplier coordination.' },
-    { title: 'Driver / Delivery', slug: 'driver-delivery', location: 'Regional', description: 'Deliver goods to stores and manage logistics.' }
+    { title: 'Store Manager - Downtown', slug: 'store-manager-downtown', location: 'Downtown', description: 'Manage store operations, staff, inventory.', hiringFrom: '2024-01-01T00:00:00.000Z', basicMonthlySalaryUSD: 4000, transportation: true, accommodation: true, freeMeals: false, bonuses: true, companyCar: false },
+    { title: 'Assistant Store Manager', slug: 'assistant-store-manager', location: 'City Center', description: 'Assist store manager in daily tasks and staff scheduling.', hiringFrom: '2024-02-01T00:00:00.000Z', basicMonthlySalaryUSD: 3000, transportation: false, accommodation: true, freeMeals: true, bonuses: false, companyCar: false },
+    { title: 'Sales Associate', slug: 'sales-associate', location: 'Mall Branch', description: 'Customer service, sales, and merchandising.', hiringFrom: '2024-03-01T00:00:00.000Z', basicMonthlySalaryUSD: 2500, transportation: false, accommodation: false, freeMeals: false, bonuses: true, companyCar: false },
+    { title: 'Inventory Specialist', slug: 'inventory-specialist', location: 'Warehouse', description: 'Manage stock counts, ordering, and supplier coordination.', hiringFrom: '2024-04-01T00:00:00.000Z', basicMonthlySalaryUSD: 3500, transportation: true, accommodation: false, freeMeals: true, bonuses: false, companyCar: true },
+    { title: 'Driver / Delivery', slug: 'driver-delivery', location: 'Regional', description: 'Deliver goods to stores and manage logistics.', hiringFrom: '2024-05-01T00:00:00.000Z', basicMonthlySalaryUSD: 2800, transportation: true, accommodation: true, freeMeals: true, bonuses: true, companyCar: true }
   ]
 
   for(const j of jobs){
@@ -36,6 +36,15 @@ async function main(){
         description: j.description,
         location: j.location,
         salary: 50000, // Add required salary field
+        applicantLimit: 100, // Added applicantLimit
+        endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // Set endDate to one year from now
+        hiringFrom: j.hiringFrom,
+        basicMonthlySalaryUSD: j.basicMonthlySalaryUSD,
+        transportation: j.transportation,
+        accommodation: j.accommodation,
+        freeMeals: j.freeMeals,
+        bonuses: j.bonuses,
+        companyCar: j.companyCar,
         employer: {
           connect: { id: emp.id }
         }
