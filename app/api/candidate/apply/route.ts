@@ -1,17 +1,23 @@
 import { NextResponse } from 'next/server'
-export const dynamic = 'force-dynamic'
+import { NextRequest } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
 import mammoth from 'mammoth'
 import pdfParse from 'pdf-parse'
-import { prisma } from 'lib/prismaClient'
-import { authMiddleware } from 'lib/authMiddleware'
+import { prisma } from '@/lib/prismaClient'
+import { authMiddleware } from '@/lib/authMiddleware'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { Job, JobStatus, Prisma } from '@prisma/client'
 
-
-import { NextRequest } from 'next/server'; // Add this import
-
-
+type JobWithApplicationsCount = Prisma.JobGetPayload<{
+  include: {
+    _count: {
+      select: { applications: true }
+    }
+  }
+}>
 
 
 
@@ -185,23 +191,31 @@ export async function POST(req: NextRequest) { // Change Request to NextRequest{
     }
 
     console.log('Looking for job with ID:', jobId)
-    const job = await prisma.job.findUnique({ where: { id: jobId } })
+    const job: JobWithApplicationsCount | null = await prisma.job.findUnique({
+      where: { id: jobId },
+      include: {
+        _count: {
+          select: { applications: true },
+        },
+      },
+    });
+
     if (!job) {
       console.error('Job not found with ID:', jobId)
       return NextResponse.json({ error: 'Job not found' }, { status: 404 })
     }
 
     // Check job status and applicant limit
-    if (job.jobStatus === 'CLOSED') {
+    if (job.status === 'CLOSED') {
       return NextResponse.json({ error: 'This job is closed and cannot accept new applications.' }, { status: 400 })
     }
 
-    if (job.applicantLimit && job.applicationsCount >= job.applicantLimit) {
+    if (job.applicantLimit && job._count.applications >= job.applicantLimit) {
       // Optionally update job status to LIMIT_REACHED if not already
-      if (job.jobStatus !== 'LIMIT_REACHED') {
+      if (job.status !== 'LIMIT_REACHED') {
         await prisma.job.update({
           where: { id: jobId },
-          data: { jobStatus: 'LIMIT_REACHED' },
+          data: { status: 'LIMIT_REACHED' },
         });
       }
       return NextResponse.json({ error: 'Applications limit reached for this job.' }, { status: 400 })
