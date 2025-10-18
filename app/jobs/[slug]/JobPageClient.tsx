@@ -66,12 +66,34 @@ export default function JobPageClient({ job, isLoggedIn, entity, isEmployer, app
                 <div className="flex items-center justify-between">
                   <h1 className="text-3xl font-bold text-gradient mb-2">{job.title}</h1>
                   {isEmployer && !isEditing && (
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className="secondaryButton-dark "><span>
-                      <Edit3 className="w-4 h-4" />
-                      Edit Job</span>
-                    </button>
+                    <div className="flex gap-2">
+                      {job.jobStatus === 'CLOSED' || job.jobStatus === 'LIMIT_REACHED' ? (
+                        <button
+                          onClick={async () => {
+                            const formData = new FormData();
+                            formData.append('reopen', 'true');
+                            const response = await fetch(`/api/employer/jobs/${job.id}`, {
+                              method: 'PUT',
+                              body: formData,
+                            });
+                            if (response.ok) {
+                              router.refresh();
+                            } else {
+                              alert('Failed to reopen job.');
+                            }
+                          }}
+                          className="secondaryButton-dark"
+                        ><span>
+                            Reopen Job</span>
+                        </button>
+                      ) : null}
+                      <button
+                        onClick={() => setIsEditing(true)}
+                        className="secondaryButton-dark "><span>
+                        <Edit3 className="w-4 h-4" />
+                        Edit Job</span>
+                      </button>
+                    </div>
                   )}
                 </div>
 
