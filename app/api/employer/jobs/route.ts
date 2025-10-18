@@ -35,6 +35,9 @@ export async function POST(req: Request){
     }
 
     const slug = createSlug(title)
+    const twoWeeksFromNow = new Date()
+    twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14)
+
     const createData: any = {
       title,
       slug: slug,
@@ -46,6 +49,9 @@ export async function POST(req: Request){
       salaryRange: null,
       vacancies: 1,
       experience: 'ENTRY_LEVEL',
+      applicantLimit: 100,
+      applicationsCount: 0,
+      endDate: twoWeeksFromNow,
       employerId: authResult.employer.id,
       hiringFrom,
       basicMonthlySalaryUSD: basicMonthlySalaryUSD ? parseInt(basicMonthlySalaryUSD) : null,
